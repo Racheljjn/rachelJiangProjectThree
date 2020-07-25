@@ -1,48 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>🎈Vending Machine🎈</title>
- <script src="jQuery.js"></script>
- <link rel="stylesheet" href="./styles/styles.css">
- <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
-</head>
-<body>
- <section>
-  <div class="container">
-   <div class="logo">
-    <h2>food <span>and</span> drink</h2>
-   </div>
-   <div class="itemContainer">
-    <div class="items">
-     <!-- Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
-     <div class="boxOne">
-      <div><img src="./assets/cola.png" alt="cola">
-      <button>$2.00</button></div>
-      <div><img src="./assets/fanta.png" alt="fanta">
-      <button>$2.00</button></div>
-      <div><img src="./assets/water.png" alt="water">
-      <button>$2.00</button></div>
-     </div>
-     <div class="boxTwo">
-      <div><img src="./assets/chips.png" alt="chips">
-      <button>$3.25</button></div>
-      <div><img src="./assets/cookies.png" alt="cookies">
-      <button>$3.00</button></div>
-      <div><img src="./assets/chocolate.png" alt="chocolate">
-      <button>$3.00</button></div>
-     </div>
-    </div>
-    <div class="cash">
-     <div><img src="./assets/coin.png" alt="coin">
-     <button>insert coins</button></div>
-    </div>
-   </div>
-   <div class="push">
-    <button>push</button>
-   </div>
-  </div>
- </section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎈Vending Machine🎈</title>
+    <script src="jQuery.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section>
+      <h2 class="summary">Order Summary</h2>
+
+      <div class="container">
+        <div class="logo">
+          <h2>food <span>and</span> drink</h2>
+        </div>
+        <div class="itemContainer">
+          <div class="items">
+            <!-- Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+            <div class="boxOne">
+              <div>
+                <img src="./assets/cola.png" alt="cola" />
+                <button id="one">cola$2</button>
+              </div>
+              <div>
+                <img src="./assets/fanta.png" alt="fanta" />
+                <button id="two">fanta$2</button>
+              </div>
+              <div>
+                <img src="./assets/water.png" alt="water" />
+                <button id="three">water$2</button>
+              </div>
+            </div>
+            <div class="boxTwo">
+              <div>
+                <img src="./assets/chips.png" alt="chips" />
+                <button id="four">chips$3</button>
+              </div>
+              <div>
+                <img src="./assets/cookies.png" alt="cookies" />
+                <button id="five">cookies$3</button>
+              </div>
+              <div>
+                <img src="./assets/chocolate.png" alt="chocolate" />
+                <button id="six">choco$3</button>
+              </div>
+            </div>
+          </div>
+          <div class="cash">
+            <div>
+              <img src="./assets/coin.png" alt="coin" />
+              <button class="coins">insert</button>
+            </div>
+          </div>
+        </div>
+        <div class="push">
+          <button>push</button>
+        </div>
+      </div>
+    </section>
+    <script>
+      // namespace
+      snackApp = {};
+
+      allItems = [
+        {
+          name: "cola",
+          price: 2,
+          button: 'one'
+        },
+        {
+          name: "fanta",
+          price: 2,
+          button: 'two'
+        },
+        {
+          name: "water",
+          price: 2,
+          button: 'three'
+        },
+        {
+          name: "chips",
+          price: 3,
+          button:'four'
+        },
+        {
+          name: "cookies",
+          price: 3,
+          button:'five'
+        },
+        {
+          name: "chocolate",
+          price: 3,
+          button:'six'
+        },
+      ];
+
+      $(function () {
+
+      });
+
+      snackApp.getItems = function (snacks) {
+        snacks.forEach(function (item) {
+          const name = `<h3>${item.name}</h3>`;
+          const price = `<h3>${item.price}</h3>`;
+          $('.summary').html('order summary');
+          $('.summary').append(`<p>you have selected ${name}</p>
+          <p>please insert ${price} coins</p>`);
+
+        });
+      };
+
+      // change the background color of clicked button
+
+      $('button').click(function () {
+        const snackId = $(this).attr('id');
+        const selectedItem = allItems.filter(function(value){
+       return value.button == snackId;
+
+      })
+
+        snackApp.getItems(selectedItem);
+      });
+    </script>
+  </body>
 </html>
