@@ -243,7 +243,7 @@ html {
 }
 
 body {
-  font-family: 'Ranchers', cursive;
+  font-family: "Ranchers", cursive;
 }
 
 h2 {
@@ -318,7 +318,8 @@ section .container .logo {
   width: 80%;
 }
 
-.boxOne, .boxTwo {
+.boxOne,
+.boxTwo {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -334,12 +335,14 @@ section .container .logo {
   margin: 30px auto;
 }
 
-.boxOne div, .boxTwo div {
+.boxOne div,
+.boxTwo div {
   margin: 10px;
   width: calc(100% / 3 - 20px);
 }
 
-.boxOne div img, .boxTwo div img {
+.boxOne div img,
+.boxTwo div img {
   width: 100%;
 }
 
@@ -353,8 +356,19 @@ section .container .logo {
   background-color: #f3ecc2;
   border: none;
   border-radius: 20px;
-  font-family: 'Ranchers', cursive;
+  font-family: "Ranchers", cursive;
   width: 100%;
   padding: 10px;
   font-size: 1.5rem;
+}
+
+.push .newButton {
+  background-color: black;
+}
+
+#plus {
+  border: solid 2px black;
+  color: black;
+  background-color: #e8505b;
+  margin-left: 20px;
 }

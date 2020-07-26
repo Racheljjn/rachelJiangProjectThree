@@ -13,7 +13,7 @@
   </head>
   <body>
     <section>
-      <h2 class="summary">Order Summary</h2>
+      <div class="summary"></div>
 
       <div class="container">
         <div class="logo">
@@ -54,78 +54,128 @@
           <div class="cash">
             <div>
               <img src="./assets/coin.png" alt="coin" />
-              <button class="coins">insert</button>
+              <div>
+                <input type="text" id="coins" value="0" />
+                <button id="plus" type="button">
+                  insert
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <div class="push">
-          <button>push</button>
+          <button id="itemContainer">push</button>
         </div>
       </div>
     </section>
     <script>
       // namespace
       snackApp = {};
+      
 
       allItems = [
         {
           name: "cola",
           price: 2,
-          button: 'one'
+          button: "one",
+          src:'./assets/cola.png'
         },
         {
           name: "fanta",
           price: 2,
-          button: 'two'
+          button: "two",
         },
         {
           name: "water",
           price: 2,
-          button: 'three'
+          button: "three",
         },
         {
           name: "chips",
           price: 3,
-          button:'four'
+          button: "four",
         },
         {
           name: "cookies",
           price: 3,
-          button:'five'
+          button: "five",
         },
         {
           name: "chocolate",
           price: 3,
-          button:'six'
+          button: "six",
         },
       ];
+      const img = allItems[0].src
+      console.log(img);
+      $('#summary').append(`${img}`);
 
-      $(function () {
-
-      });
-
+      $(function () {});
+      // clicking the snack name button, append order summary to the HTML page.
+      let totalPrice = 0;
+      let selectedName = '';
       snackApp.getItems = function (snacks) {
         snacks.forEach(function (item) {
-          const name = `<h3>${item.name}</h3>`;
-          const price = `<h3>${item.price}</h3>`;
-          $('.summary').html('order summary');
-          $('.summary').append(`<p>you have selected ${name}</p>
+          const name = `<span>${item.name}</span>`;
+          const price = `<span>${item.price}</span>`;
+          totalPrice = item.price;
+          selectedName = item.name;
+          $(".summary").html("");
+          $(".summary").append(`<h3>Order Summary</h3>
+          <p>you have selected ${name}</p>
           <p>please insert ${price} coins</p>`);
-
         });
+      };
+      // 
+      $("#plus").click(function () {
+       snackApp.getButton(totalPrice);
+
+       });
+
+      snackApp.getButton = function (total) {
+        
+          const numText = $("#coins").val();
+          let num = parseInt(numText);
+          if (num < total) {
+            $(".summary").html("");
+            $(".summary").append(`
+        <h3>Receipt</h3>
+        <p>Insufficient fund</p>`);
+          } else if (num == total) {
+            $(".summary").html("");
+            $(".summary").append(`
+        <h3>Receipt</h3>
+        <p>Your snack has been served</p>`);
+          } else {
+            const change = num - total;
+            $(".summary").html("");
+            $(".summary").append(`
+         <h3>Receipt</h3>
+         <p>Your snack has been served</P>
+        <p>Here is your change ${change}</p>`);
+          }
+        
       };
 
       // change the background color of clicked button
 
-      $('button').click(function () {
-        const snackId = $(this).attr('id');
-        const selectedItem = allItems.filter(function(value){
-       return value.button == snackId;
+      $("button").click(function () {
+        const snackId = $(this).attr("id");
+
+        const selectedItem = allItems.filter(function (value) {
+          return value.button == snackId;
+        });
+        snackApp.getItems(selectedItem);        
+      });
+      //animate the push button
+      $('#itemContainer').click(function(){
+       $('.push button').html(selectedName);
+       
 
       })
 
-        snackApp.getItems(selectedItem);
-      });
+
+      
     </script>
   </body>
 </html>
