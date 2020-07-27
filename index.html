@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <section>
@@ -22,45 +26,51 @@
         <div class="itemContainer">
           <div class="items">
             <!-- Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+
+            <!-- first shelf -->
             <div class="boxOne">
               <div>
                 <img src="./assets/cola.png" alt="cola" />
-                <button id="one">cola$2</button>
+                <button class="btn" id="one">cola$2</button>
               </div>
               <div>
                 <img src="./assets/fanta.png" alt="fanta" />
-                <button id="two">fanta$2</button>
+                <button class="btn" id="two">fanta$2</button>
               </div>
               <div>
                 <img src="./assets/water.png" alt="water" />
-                <button id="three">water$2</button>
+                <button class="btn" id="three">water$2</button>
               </div>
             </div>
+            <!-- second shelf -->
+
             <div class="boxTwo">
               <div>
                 <img src="./assets/chips.png" alt="chips" />
-                <button id="four">chips$3</button>
+                <button class="btn" id="four">chips$3</button>
               </div>
               <div>
                 <img src="./assets/cookies.png" alt="cookies" />
-                <button id="five">cookies$3</button>
+                <button class="btn" id="five">cookies$3</button>
               </div>
               <div>
                 <img src="./assets/chocolate.png" alt="chocolate" />
-                <button id="six">choco$3</button>
+                <button class="btn" id="six">choco$3</button>
               </div>
             </div>
           </div>
           <div class="cash">
-            <div>
-              <img src="./assets/coin.png" alt="coin" />
-              <div>
-                <input type="text" id="coins" value="0" />
-                <button id="plus" type="button">
-                  insert
-                </button>
+            <div class="calculator">
+              <div class="innerCal">
+                <p class="dollarSign">$<span>0</span></p>
               </div>
             </div>
+
+            <button id="plus" type="button">
+              <div class="insert">+</div>
+            </button>
+
+            <button id="ok">ok</button>
           </div>
         </div>
         <div class="push">
@@ -71,14 +81,12 @@
     <script>
       // namespace
       snackApp = {};
-      
-
       allItems = [
         {
           name: "cola",
           price: 2,
           button: "one",
-          src:'./assets/cola.png'
+          src: "./assets/cola.png",
         },
         {
           name: "fanta",
@@ -106,14 +114,14 @@
           button: "six",
         },
       ];
-      const img = allItems[0].src
-      console.log(img);
-      $('#summary').append(`${img}`);
 
       $(function () {});
       // clicking the snack name button, append order summary to the HTML page.
       let totalPrice = 0;
-      let selectedName = '';
+      let selectedName = "";
+      let i = 0;
+      let flag = 0;
+
       snackApp.getItems = function (snacks) {
         snacks.forEach(function (item) {
           const name = `<span>${item.name}</span>`;
@@ -121,61 +129,71 @@
           totalPrice = item.price;
           selectedName = item.name;
           $(".summary").html("");
+          $(".summary").addClass("newSummary");
           $(".summary").append(`<h3>Order Summary</h3>
           <p>you have selected ${name}</p>
           <p>please insert ${price} coins</p>`);
         });
       };
-      // 
+      //
       $("#plus").click(function () {
-       snackApp.getButton(totalPrice);
+        if (i >= 5) {
+          i = 5;
+        } else {
+          i++;
+        }
+        $(".dollarSign span").html(i);
+      });
 
-       });
-
-      snackApp.getButton = function (total) {
-        
-          const numText = $("#coins").val();
-          let num = parseInt(numText);
-          if (num < total) {
-            $(".summary").html("");
-            $(".summary").append(`
+      // insert coins and get change
+      snackApp.confirm = function (total) {
+        if (i < total) {
+          $(".summary").html(`
         <h3>Receipt</h3>
         <p>Insufficient fund</p>`);
-          } else if (num == total) {
-            $(".summary").html("");
-            $(".summary").append(`
+        } else if (i == total) {
+          $(".summary").html(`
         <h3>Receipt</h3>
         <p>Your snack has been served</p>`);
-          } else {
-            const change = num - total;
-            $(".summary").html("");
-            $(".summary").append(`
+          flag = 1;
+        } else {
+          const change = i - total;
+          $(".summary").html(`
          <h3>Receipt</h3>
          <p>Your snack has been served</P>
         <p>Here is your change ${change}</p>`);
-          }
-        
+          flag = 1;
+        }
       };
+      $("#ok").click(function () {
+        snackApp.confirm(totalPrice);
+        if(flag == 1){
+         i = 0;
+        }
+        $(".dollarSign span").html(i);
+
+      });
 
       // change the background color of clicked button
 
-      $("button").click(function () {
+      $(".btn").click(function () {
         const snackId = $(this).attr("id");
+        $(".btn").css("backgroundColor", "#f9d56e");
+        $("#" + snackId).css("backgroundColor", "#14b1ab");
 
         const selectedItem = allItems.filter(function (value) {
           return value.button == snackId;
         });
-        snackApp.getItems(selectedItem);        
+        snackApp.getItems(selectedItem);
       });
       //animate the push button
-      $('#itemContainer').click(function(){
-       $('.push button').html(selectedName);
-       
-
-      })
-
-
-      
+      $("#itemContainer").click(function () {
+        if (flag == 1) {
+          $(".push button").html(`${selectedName} is here`);
+        }else{
+         $(".push button").html("item's not available")
+        }
+      });
     </script>
   </body>
 </html>

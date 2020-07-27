@@ -22,12 +22,14 @@ h2 {
 section {
   background-color: #f18c8e;
   padding: 50px;
+  display: flex;
+  flex-direction: row-reverse;
 
   .container {
+    margin: 0 auto;
     background-color: #e8505b;
     width: 400px;
-    margin: 0 auto;
-    height: 550px;
+    height: auto;
     border-radius: 20px;
     padding: 30px;
     display: flex;
@@ -40,41 +42,118 @@ section {
     }
   }
 }
+.newSummary {
+  width: 20%;
+  height: 100px;
+  margin-right: 200px;
+  border: dotted 2px black;
+  line-height: 1.5rem;
+}
+
 //items' styles
 .itemContainer {
   display: flex;
   flex: 1;
   .items {
     margin-right: 20px;
-    width: calc(80% - 20px);
+    width: calc(90% - 20px);
     display: flex;
     flex-direction: column;
   }
 }
-.cash {
-  width: 20%;
-  align-self: center;
-  img {
-    width: 80%;
+.calculator {
+  width: 40px;
+  height: 40px;
+  background-color: #f9d56e;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  .innerCal {
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+    .dollarSign {
+      text-align: left;
+      margin-left: 5px;
+      margin-top: 3px;
+    }
   }
+}
+#plus {
+  width: 100%;
+  color: black;
+  margin-left: 10px;
+ border-radius: 0;
+  .insert {
+    margin: 0 auto;
+    font-size: 20px;
+  }
+}
+
+.cash {
+  width: 10%;
+  align-self: center;
 }
 .boxOne,
 .boxTwo {
+  position: relative;
   width: 100%;
   display: flex;
-  margin: 0 auto;
+  justify-content: center;
   flex: 1;
   align-items: center;
-  border: solid 2px white;
-  margin: 30px auto;
+  background-color: #363636;
+  margin: 15px auto;
+  border-radius: 20px;
+  padding: 10px;
+
   div {
-    margin: 10px;
-    width: calc(100% / 3 - 20px);
+    margin: 5px;
+    width: calc(100% / 3 - 10px);
     img {
       width: 100%;
     }
   }
 }
+#ok {
+  width: 40px;
+  margin-left: 7px;
+  margin-top: 10px;
+  height: 30px;
+}
+button {
+  width: 75px;
+  padding: 5px;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  background-color: #f9d56e;
+  margin-top: 5px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+  font-family: "Oswald", sans-serif;
+
+  &:hover {
+    background-color: #14b1ab;
+  }
+  &:active {
+    background-color: #14b1ab;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+}
+
+input[type="text"] {
+  width: 60px;
+  background-color: #e8505b;
+  border: none;
+  border: solid 2px black;
+}
+
 .push {
   width: 100%;
   text-align: center;
@@ -84,22 +163,54 @@ section {
     background-color: #f3ecc2;
     border: none;
     border-radius: 20px;
-    font-family: "Ranchers", cursive;
     width: 100%;
     padding: 10px;
     font-size: 1.5rem;
   }
 }
-.push .newButton{
- background-color:black;
- 
- 
- 
+@media (max-width:560px){
+ h2{
+  font-size: 1.5rem;
+ }
+ section{
+  flex-direction: column;
+  .container{
+   width: 100%;
+  }
+ }
+ .newSummary{
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+ }
+ .boxOne,.boxTwo{
+  flex-direction: column;
+  div{
+   width: 100%;
+  }
+
+ }
+ button{
+  width: 100%;
+ }
+
+.itemContainer{
+ flex-direction: column;
+ .items{
+  width: 100%;
+  margin-right: 0;
+ }
+ }
 }
-#plus {
-  
-  border: solid 2px black;
-  color: black;
-  background-color: #e8505b;
-  margin-left: 20px;
+.calculator{
+ margin-left: 0;
 }
+#ok{
+ margin-left: 0;
+}
+
+
+
+
+
+
