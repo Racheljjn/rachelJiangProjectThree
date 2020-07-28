@@ -76,8 +76,12 @@
         <div class="push">
           <button id="itemContainer">push</button>
         </div>
-      </div>
+      </div>      
     </section>
+    <div class="copyright"><p>Created by Jiani Jiang 2020</p></div>
+
+
+
     <script>
       // namespace
       snackApp = {};
@@ -167,11 +171,10 @@
       };
       $("#ok").click(function () {
         snackApp.confirm(totalPrice);
-        if(flag == 1){
-         i = 0;
+        if (flag == 1) {
+          i = 0;
         }
         $(".dollarSign span").html(i);
-
       });
 
       // change the background color of clicked button
@@ -190,8 +193,8 @@
       $("#itemContainer").click(function () {
         if (flag == 1) {
           $(".push button").html(`${selectedName} is here`);
-        }else{
-         $(".push button").html("item's not available")
+        } else {
+          $(".push button").html("item's not available");
         }
       });
     </script>

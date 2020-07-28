@@ -269,6 +269,7 @@ section {
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
+  height: calc(100vh - 20px);
 }
 
 section .container {
@@ -438,11 +439,10 @@ button:active {
           transform: translateY(4px);
 }
 
-input[type="text"] {
-  width: 60px;
+.copyright p {
   background-color: #e8505b;
-  border: none;
-  border: solid 2px black;
+  height: 20px;
+  text-align: center;
 }
 
 .push {
@@ -478,13 +478,15 @@ input[type="text"] {
     margin: 0 auto;
     margin-bottom: 50px;
   }
-  .boxOne, .boxTwo {
+  .boxOne,
+  .boxTwo {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .boxOne div, .boxTwo div {
+  .boxOne div,
+  .boxTwo div {
     width: 100%;
   }
   button {
